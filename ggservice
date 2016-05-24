@@ -15,15 +15,18 @@ def foo():
     x.stdin.write('info all\n')
     result = x.communicate()
     lines = result[0].split('\n')
-    rv = {}
+    rv = []
     for line in lines:
         a = line.split()
-        if len(a) > 0 and a[0] in ['MANAGER','REPLICAT','JAGENT','EXTRACT']:
-            if len(a) == 2:
-                rv[a[0]] = [a[1]]
-            else:
-                rv[a[0]] = [a[1],a[2]]
-    return json.dumps(rv) + '\n'
+        if len(a) > 0:
+            kname = a[0]
+            if   kname in ['MANAGER','JAGENT']:
+                    # Status
+                    rv.append([kname, a[1]])
+            if kname in ['REPLICAT','EXTRACT']:
+                    # Status,Group,Lag at Chkpt,Time Since Chkpt
+                    rv.append([kname, a[1:5]])
+    return json.dumps(rv, separators=(',',':')) + '\n'
 
 
 if __name__ == '__main__':
