@@ -1,0 +1,31 @@
+#!/usr/bin/env python
+"""
+ggservice -- ggsci RESTful service
+"""
+GGSCI = '/ggate/ggsci'
+
+import flask, subprocess, json
+
+app = flask.Flask(__name__)
+
+@app.route('/infoall')
+def foo():
+    x = subprocess.Popen(GGSCI, close_fds=True,
+                           stdin=subprocess.PIPE, stdout=subprocess.PIPE)
+    x.stdin.write('info all\n')
+    result = x.communicate()
+    lines = result[0].split('\n')
+    rv = {}
+    for line in lines:
+        a = line.split()
+        if len(a) > 0 and a[0] in ['MANAGER','REPLICAT','JAGENT','EXTRACT']:
+            if len(a) == 2:
+                rv[a[0]] = [a[1]]
+            else:
+                rv[a[0]] = [a[1],a[2]]
+    return json.dumps(rv) + '\n'
+
+
+if __name__ == '__main__':
+    app.debug = True
+    app.run()
