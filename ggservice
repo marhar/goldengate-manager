@@ -4,7 +4,7 @@
 #------------------------------------------------------------------------
 import flask, subprocess, json
 
-GGSCI = '/ggate/ggsci'
+GGSCI = '/bdggvol/ggaws/ggsci'
 app = flask.Flask(__name__)
 
 #------------------------------------------------------------------------
@@ -30,5 +30,5 @@ def infoall():
 
 #------------------------------------------------------------------------
 if __name__ == '__main__':
-    app.debug = True
-    app.run()
+    #app.debug = True
+    app.run(port=6001)

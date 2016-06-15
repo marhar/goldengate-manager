@@ -1,0 +1,76 @@
+#!/usr/bin/env python
+"""
+
+datastore        alter, create, delete, info, repair 
+er               info, kill, lag, send, status, start, stats, stop 
+extract          add, alter, cleanup, delete, info, kill, 
+                 lag, register, send, start, stats, status, stop 
+                 unregister 
+exttrail         add, alter, delete, info 
+ggsevt           view 
+jagent           info, start, status, stop 
+manager          info, send, start, stop, status 
+marker           info 
+parameters       edit, view, set editor, info, getparaminfo 
+replicat         add, alter, cleanup, delete, info, kill, lag, register, send, 
+                 start, stats, status, stop, synchronize, unregister 
+report           view 
+rmttrail         add, alter, delete, info 
+tracetable       add, delete, info 
+trandata         add, delete, info 
+schematrandata   add, delete, info 
+checkpointtable  add, delete, cleanup, info, upgrade 
+heartbeattable   add, delete, alter, info 
+heartbeatentry   delete 
+ 
+ 
+Commands without an object: 
+(Database)       DBLOGIN, LIST TABLES, ENCRYPT PASSWORD, FLUSH SEQUENCE 
+                 MININGDBLOGIN, SET NAMECCSID 
+(DDL)            DUMPDDL 
+(Miscellaneous)   ! ,ALLOWNESTED | NOALLOWNESTED, CREATE SUBDIRS, 
+                 DEFAULTJOURNAL, FC, HELP, HISTORY, INFO ALL, OBEY, SHELL, 
+                 SHOW, VERSIONS, VIEW GGSEVT, VIEW REPORT  
+                 (note: type the word COMMAND after the ! to display the  
+                 ! help topic, for example: GGSCI (sys1)> help ! command 
+
+
+
+"""
+
+import flask, subprocess
+
+app = flask.Flask(__name__)
+
+@app.route('/replicat/add')
+@app.route('/replicat/alter')
+@app.route('/replicat/cleanup')
+@app.route('/replicat/delete')
+@app.route('/replicat/info')
+@app.route('/replicat/kill')
+@app.route('/replicat/lag')
+@app.route('/replicat/register')
+@app.route('/replicat/send ')
+@app.route('/replicat/start')
+@app.route('/replicat/stats')
+@app.route('/replicat/status')
+@app.route('/replicat/stop')
+@app.route('/replicat/synchronize')
+@app.route('/replicat/unregister')
+
+
+@app.route('/infoall')
+def foo():
+def foo():
+    return "not implemented\n"
+    return "not implemented\n"
+
+@app.route('/stat')
+def stat():
+    pipe = subprocess.Popen("/Users/mharrison/tst/myggstat",
+             shell=True, stdout=subprocess.PIPE).stdout
+    return pipe.read()
+
+if __name__ == '__main__':
+    app.debug = True
+    app.run()
