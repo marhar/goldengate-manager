@@ -1,15 +1,15 @@
 #!/usr/bin/env python
-"""
-ggservice -- ggsci RESTful service
-"""
-GGSCI = '/ggate/ggsci'
+""" ggservice -- ggsci RESTful query service """
 
+#------------------------------------------------------------------------
 import flask, subprocess, json
 
+GGSCI = '/ggate/ggsci'
 app = flask.Flask(__name__)
 
+#------------------------------------------------------------------------
 @app.route('/infoall')
-def foo():
+def infoall():
     x = subprocess.Popen(GGSCI, close_fds=True,
                            stdin=subprocess.PIPE, stdout=subprocess.PIPE)
     x.stdin.write('info all\n')
@@ -28,7 +28,7 @@ def foo():
                     rv.append([kname, a[1:5]])
     return json.dumps(rv, separators=(',',':')) + '\n'
 
-
+#------------------------------------------------------------------------
 if __name__ == '__main__':
     app.debug = True
     app.run()
