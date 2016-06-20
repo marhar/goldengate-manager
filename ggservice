@@ -30,5 +30,5 @@ def infoall():
 
 #------------------------------------------------------------------------
 if __name__ == '__main__':
-    #app.debug = True
-    app.run(port=6001)
+    app.debug = True
+    app.run(port=8009)
